@@ -18,6 +18,8 @@ export default function Home() {
     setSlots(res.data);
   }
 
+  
+
   useEffect(() => {
     (async () => {
       try {
