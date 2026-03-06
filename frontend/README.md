@@ -1,70 +1,303 @@
-# Getting Started with Create React App
+# Auteur
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projet réalisé dans le cadre du module **Technologies Web**.
 
-## Available Scripts
+- **Nom : SAID BOUSSIF & IGUIDAR HAMID**
+- **Formation : Bachelor Ingénierie des Systèmes Informatiques et Logiciels - TEMPS AMENAGE**
+- **EST ESSAOUIRA 2025/2026**
 
-In the project directory, you can run:
 
-### `npm start`
+# QueueBuddy – Gestion de créneaux de rendez-vous
+Application web simple permettant de gérer des **créneaux de rendez-vous (slots)** et des **réservations d’étudiants (bookings)**.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Le projet est développé avec :
+- **Frontend** : React
+- **Backend** : Flask (API REST)
+- **Base de données** : SQLite
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+# Objectif du projet
+QueueBuddy permet d'organiser des rendez-vous entre des étudiants et une administration ou un service.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Fonctionnement général :
 
-### `npm run build`
+1. L’**administrateur** crée des créneaux disponibles.
+2. L’**étudiant** consulte les créneaux.
+3. L’étudiant **réserve un créneau**.
+4. L’admin peut **modifier le statut** de la réservation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Fonctionnalités principales
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Côté étudiant
+- Consulter les créneaux disponibles
+- Réserver un créneau
+- Consulter ses réservations
+- Voir le statut de ses réservations
 
-### `npm run eject`
+Statuts possibles :
+- `pending`
+- `confirmed`
+- `done`
+- `canceled`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Côté administrateur
+- Créer des créneaux
+- Voir toutes les réservations
+- Modifier le statut d’une réservation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Règles de validation
 
-## Learn More
+Le backend vérifie automatiquement :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Pas de réservation en double
+Un étudiant ne peut pas réserver deux fois le même créneau.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Créneau complet
+Si le nombre de réservations atteint la capacité du créneau, la réservation est refusée.
 
-### Code Splitting
+### 3. Codes HTTP
+L’API retourne des codes corrects :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Code | Signification |
+|-----|---------------|
+| 200 | Succès |
+| 201 | Création réussie |
+| 400 | Erreur de validation |
+| 404 | Ressource non trouvée |
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Architecture du projet
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+QueueBuddy
+│
+├── backend
+│ ├── app.py
+│ └── queuebuddy.db
+│
+└── frontend
+├── package.json
+└── src
+├── App.js
+├── api.js
+└── pages
+├── Home.js
+├── MyBookings.js
+└── Admin.js
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+# Technologies utilisées
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Backend
+- Python
+- Flask
+- Flask-CORS
+- SQLite
 
-### `npm run build` fails to minify
+## Frontend
+- React
+- React Router
+- Axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+# Installation et exécution
+
+## 1. Backend (Flask)
+
+Aller dans le dossier backend :
+
+
+cd backend
+
+
+Créer un environnement virtuel (optionnel mais recommandé) :
+
+
+python -m venv venv
+
+
+Activer l’environnement :
+
+### Windows
+
+venv\Scripts\activate
+
+
+### Linux / Mac
+
+source venv/bin/activate
+
+
+Installer les dépendances :
+
+
+pip install flask flask-cors
+
+
+Lancer le serveur :
+
+
+python app.py
+
+
+Le serveur démarre sur :
+
+
+http://127.0.0.1:5000
+
+
+La base SQLite `queuebuddy.db` est créée automatiquement.
+
+---
+
+# Frontend (React)
+
+Aller dans le dossier frontend :
+
+
+cd frontend
+
+
+Installer les dépendances :
+
+
+npm install
+
+
+Dans `package.json` vérifier la présence du proxy :
+
+
+"proxy": "http://127.0.0.1:5000
+"
+
+
+Lancer l’application :
+
+
+npm start
+
+
+Le frontend sera accessible sur :
+
+
+http://localhost:3000
+
+
+---
+
+# Endpoints API
+
+## Créneaux
+
+### GET /api/slots
+Retourne tous les créneaux disponibles.
+
+Exemple :
+
+
+[
+{ "id": 1, "datetime": "2026-03-05 10:00", "capacity": 2 }
+]
+
+
+---
+
+### POST /api/slots
+Créer un créneau.
+
+Body :
+
+
+{
+"datetime": "2026-03-05 10:00",
+"capacity": 2
+}
+
+
+---
+
+# Réservations
+
+### POST /api/bookings
+Créer une réservation.
+
+Body :
+
+
+{
+"slot_id": 1,
+"student_name": "Said",
+"student_id": "CNE123",
+"reason": "Rendez-vous administratif"
+}
+
+
+Réponse :
+
+
+{
+"id": 5,
+"slot_id": 1,
+"student_name": "Said",
+"student_id": "CNE123",
+"reason": "Rendez-vous administratif",
+"status": "pending"
+}
+
+
+---
+
+### GET /api/bookings
+Retourne toutes les réservations.
+
+---
+
+### PATCH /api/bookings/{id}
+Modifier le statut d’une réservation.
+
+Body :
+
+
+{
+"status": "confirmed"
+}
+
+
+---
+
+# Scénario de démonstration (soutenance)
+
+1. L’admin crée un créneau dans la page **Admin**
+2. L’étudiant va dans la page **Créneaux**
+3. L’étudiant réserve un créneau
+4. L’admin change le statut de la réservation
+5. L’étudiant consulte **Mes réservations** et voit le statut mis à jour
+
+Test supplémentaire :
+
+- Essayer de réserver deux fois le même créneau → erreur
+- Remplir un créneau jusqu’à sa capacité → refus de réservation
+
+---
+
+# Améliorations possibles
+
+- Authentification administrateur
+- Notifications utilisateur
+- Recherche de créneaux par date
+- Filtrage des réservations par statut
+- Interface plus avancée
+
+---
+
