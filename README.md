@@ -2,7 +2,7 @@
 
 Projet réalisé dans le cadre du module **Technologies Web**.
 
-- **Nom : SAID BOUSSIF & IGUIDAR HAMID**
+- **Nom : SAID BOUSSIF**
 - **Formation : Bachelor Ingénierie des Systèmes Informatiques et Logiciels - TEMPS AMENAGE**
 - **EST ESSAOUIRA 2025/2026**
 

@@ -52,27 +52,27 @@ def get_slots():
 @app.post("/api/slots")
 def create_slot():
     data = request.get_json(silent=True) or {}
-    dt = data.get("datetime")
-    cap = data.get("capacity")
+    date = data.get("datetime")
+    capacite = data.get("capacity")
 
-    if not dt or cap is None:
+    if not date or capacite is None:
         return jsonify({"error": "datetime et capacity sont obligatoires"}), 400
 
     try:
-        cap = int(cap)
-        if cap <= 0:
+        capacite = int(capacite)
+        if capacite <= 0:
             return jsonify({"error": "capacity doit être > 0"}), 400
     except:
         return jsonify({"error": "capacity doit être un entier"}), 400
 
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("INSERT INTO slots(datetime, capacity) VALUES (?, ?)", (dt, cap))
+    cur.execute("INSERT INTO slots(datetime, capacity) VALUES (?, ?)", (date, capacite))
     conn.commit()
     new_id = cur.lastrowid
     conn.close()
 
-    return jsonify({"id": new_id, "datetime": dt, "capacity": cap}), 201
+    return jsonify({"id": new_id, "datetime": date, "capacity": capacite}), 201
 
 
 @app.post("/api/bookings")
